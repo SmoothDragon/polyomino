@@ -18,13 +18,13 @@ class BitPolyomino:
 
     def from_file(filename, fill='#'):
         '''
-        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('1.in'))
+        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('test/1.in'))
         False
-        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('2.in'))
+        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('test/2.in'))
         True
-        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('3.in'))
+        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('test/3.in'))
         False
-        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('4.in'))
+        >>> BitPolyomino.cubable_hexomino(BitPolyomino.from_file('test/4.in'))
         True
         '''
         piece = 0
@@ -92,17 +92,17 @@ class BitPolyomino:
         1081146489872384257
         '''
         # transpose 1x1 blocks in 2x2 squares
-        x ^= (x & 0x5500550055005500) >> 7
         x ^= (x & 0x00aa00aa00aa00aa) << 7
-        x ^= (x & 0x5500550055005500) >> 7
+        x ^= (x >> 7) & 0x00aa00aa00aa00aa
+        x ^= (x & 0x00aa00aa00aa00aa) << 7
         # transpose 2x2 blocks in 4x4 squares
-        x ^= (x & 0x3333000033330000) >> 14
         x ^= (x & 0x0000cccc0000cccc) << 14
-        x ^= (x & 0x3333000033330000) >> 14
+        x ^= (x >> 14) & 0x0000cccc0000cccc
+        x ^= (x & 0x0000cccc0000cccc) << 14
         # transpose 4x4 blocks in 8x8 squares
-        x ^= (x & 0x0f0f0f0f00000000) >> 28
         x ^= (x & 0x00000000f0f0f0f0) << 28
-        x ^= (x & 0x0f0f0f0f00000000) >> 28
+        x ^= (x >> 28) & 0x00000000f0f0f0f0
+        x ^= (x & 0x00000000f0f0f0f0) << 28
         return x
 
     def vertical_reflect(x):
