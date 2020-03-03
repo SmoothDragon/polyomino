@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
-    from polyomino import BitPolyomino
+    from polyomino import Polyomino
     import os
     import os.path
 
@@ -16,8 +16,8 @@ if __name__ == '__main__':
         print('Testing: ', testfile)
         testoutfile = base + '.ans'
 
-        piece = BitPolyomino.from_file(testfile)
-        if BitPolyomino.cubable_hexomino(piece):
+        piece = Polyomino.from_file(testfile)
+        if Polyomino.cubable_hexomino(piece):
             output = 'can fold\n'
         else:
             output = 'cannot fold\n'
